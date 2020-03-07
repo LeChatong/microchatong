@@ -15,24 +15,15 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public APIResponse getAllUsers() {
+    public List<UserModel> getAllUsers() {
         APIResponse resp = new APIResponse();
         List<UserModel> users = new ArrayList<UserModel>();
         try{
             users = userRepository.findAll();
-            if(!users.isEmpty()){
-                resp.setData(users);
-                resp.setStatus(ResponseCode.SUCCESS);
-            }else{
-                resp.setData(users);
-                resp.setStatus(ResponseCode.NOT_FOUND);
-            }
         }catch(Exception e){
-            resp.setData(null);
-            resp.setMessage(e.getMessage());
-            resp.setStatus(ResponseCode.SERVER_ERROR);
+            users = null;
         }
-        return resp;
+        return users;
     }
 
     public APIResponse getOneUser(int id) {
@@ -74,23 +65,15 @@ public class UserService {
         return resp;
     }
 
-    public APIResponse searchUser(String username, String email) {
-        APIResponse resp = new APIResponse();
+    public UserModel searchUser(String username, String email) {
+        UserModel user = new UserModel();
         try{
-            UserModel user = userRepository.searchUser(username, email);
-            if(user != null){
-                resp.setData(user);
-                resp.setStatus(ResponseCode.SUCCESS);
-            }else{
-                resp.setData(user);
-                resp.setStatus(ResponseCode.NOT_FOUND);
-            }
+            user = userRepository.searchUser(username, email);
+            
         }catch(Exception e){
-            resp.setData(null);
-            resp.setMessage(e.getMessage());
-            resp.setStatus(ResponseCode.SERVER_ERROR);
+            user = null;
         }
-        return resp;
+        return user;
     }
     
     

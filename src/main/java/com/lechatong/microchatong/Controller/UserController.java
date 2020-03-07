@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
@@ -19,8 +20,8 @@ public class UserController {
     private UserService service;
 
     @GetMapping(value = "/list")
-    public APIResponse usersList(){
-        return service.getAllUsers();
+    public ResponseEntity usersList(){
+        return ResponseEntity.ok(service.getAllUsers()) ;
     }
 
     @GetMapping(value = "/{id}")
@@ -34,7 +35,7 @@ public class UserController {
     }
 
     @GetMapping(value = "/find/{username}/{email}")
-    public APIResponse getUserByUsernameAndEmail(@PathVariable String username, @PathVariable String email){
+    public UserModel getUserByUsernameAndEmail(@PathVariable String username, @PathVariable String email){
         return service.searchUser(username, email);
     }
 }
