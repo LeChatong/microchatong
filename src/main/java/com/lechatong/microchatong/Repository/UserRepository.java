@@ -15,9 +15,13 @@ public interface UserRepository extends JpaRepository<UserModel, Integer> {
     public List<UserModel> findAll();
     @Override
     public UserModel save(UserModel User);
-    public List<UserModel> findAllByUsernameLike(String usernameSearch);
+    
+    @Query("SELECT u FROM auth_user u WHERE LOWER(u.username) LIKE lower(:search)\n" +
+            "  OR LOWER(u.first_name)LIKE lower(:search) OR LOWER(u.last_name)LIKE lower(:search)\n" +
+            "  ORDER BY u.first_name, u.last_name, u.username")
+    public List<UserModel> findAllBySearch(@Param("search") String search);
 
     @Query("SELECT u " +
             "FROM auth_user u where u.username = :username AND u.email = :email")
-    public UserModel searchUser(@Param("username") String username, @Param("email") String email);
+    public UserModel searchUserByUsernameAndEmail(@Param("username") String username, @Param("email") String email);
 }

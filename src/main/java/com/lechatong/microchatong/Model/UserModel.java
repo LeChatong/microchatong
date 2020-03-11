@@ -1,12 +1,14 @@
 package com.lechatong.microchatong.Model;
 
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.Date;
+import javax.persistence.Temporal;
 
 @Entity(name = "auth_user")
-public class UserModel {
+public class UserModel implements Serializable {
     @Id
     @Column(name = "id")
     private int id;
@@ -15,6 +17,7 @@ public class UserModel {
     private String password;
 
     @Column(name = "last_login")
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date last_login;
 
     @Column(name = "is_superuser")
@@ -39,6 +42,7 @@ public class UserModel {
     private Boolean is_active;
 
     @Column(name = "date_joined")
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date date_joined;
 
     public UserModel() {

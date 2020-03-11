@@ -11,17 +11,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("microchatong/user")
 public class UserController {
     @Autowired
     private UserService service;
 
     @GetMapping(value = "/list")
-    public ResponseEntity usersList(){
-        return ResponseEntity.ok(service.getAllUsers()) ;
+    public APIResponse usersList(){
+        return service.getAllUsers() ;
     }
 
     @GetMapping(value = "/{id}")
@@ -29,14 +30,14 @@ public class UserController {
         return service.getOneUser(id);
     }
 
-    @GetMapping(value = "/searchUsername/{search}")
-    public APIResponse searchUsername(@PathVariable String search){
-        return  service.searchUserByUsername(search);
+    @PostMapping(value = "/search")
+    public APIResponse search(String search){
+        return  service.searchUser(search);
     }
 
-    @GetMapping(value = "/find/{username}/{email}")
-    public UserModel getUserByUsernameAndEmail(@PathVariable String username, @PathVariable String email){
-        return service.searchUser(username, email);
+    @PostMapping(value = "/login")
+    public APIResponse getUserByUsernameAndEmail(String username, String email){
+        return service.login(username, email);
     }
 }
 
