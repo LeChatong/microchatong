@@ -7,6 +7,7 @@ package com.lechatong.microchatong.Controller;
 
 import com.lechatong.microchatong.Service.MemberService;
 import com.lechatong.microchatong.utils.APIResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("microchatong/member")
 public class MemberController {
     
+    @Autowired
     private MemberService service;
     
     @GetMapping(value = "/list")

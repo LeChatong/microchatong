@@ -15,7 +15,6 @@ import org.springframework.stereotype.Repository;
  * @author LeChatong
  */
 @Repository
-
 public interface MemberRepository extends JpaRepository<MemberModel, Integer>{
     
     public MemberModel findById(int id);
