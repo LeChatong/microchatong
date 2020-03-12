@@ -27,6 +27,8 @@ public interface TvRepository extends JpaRepository<TvModel, Integer>{
     @Override
     public TvModel save(TvModel tv);
     
-    @Query("SELECT DISTINCT t.id_tv FROM lcu_tv_detail t")
+    @Query(value = "SELECT DISTINCT ON (t.id_tv) t.id, t.id_tv, t.nb_season, t.nb_episode, t.title_tv, t.link_download, t.voice_language,"
+            + "t.quality_video, t.quality_audio, t.subtitle, t.subtitle_language, t.member_id, t.created_at,"
+            + "t.updated_at FROM lcu_tv_detail t ORDER BY t.id_tv ASC, t.title_tv", nativeQuery = true)
     public List<TvModel> findAllTvAvaible();
 }
