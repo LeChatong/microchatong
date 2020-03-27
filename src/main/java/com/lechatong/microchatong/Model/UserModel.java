@@ -62,6 +62,14 @@ public class UserModel implements Serializable {
         this.date_joined = date_joined;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getPassword() {
         return password;
     }

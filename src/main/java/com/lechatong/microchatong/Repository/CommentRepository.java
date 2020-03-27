@@ -5,7 +5,7 @@
  */
 package com.lechatong.microchatong.Repository;
 
-import com.lechatong.microchatong.Model.MemberModel;
+import com.lechatong.microchatong.Model.CommentModel;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -15,11 +15,10 @@ import org.springframework.stereotype.Repository;
  * @author LeChatong
  */
 @Repository
-public interface MemberRepository extends JpaRepository<MemberModel, Integer>{
+public interface CommentRepository extends JpaRepository<CommentModel, Integer>{
     
-    public MemberModel findById(int id);
+    public CommentModel findById(int id);
+    
     @Override
-    public List<MemberModel> findAll();
-    @Override
-    public MemberModel save(MemberModel Member);
+    public List<CommentModel> findAll();
 }
